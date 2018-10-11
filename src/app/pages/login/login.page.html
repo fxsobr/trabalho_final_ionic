@@ -1,0 +1,15 @@
+<ion-content>
+  <h4 *ngIf="error">{{error}}</h4>
+  <form (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label>Login</ion-label>
+      <ion-input type="email" name="email" class="form-control" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Senha</ion-label>
+      <ion-input type="password" name="password" class="form-control" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <app-botao textoDoBotao="Entrar"></app-botao>
+  </form>
+  <ion-label text-center="" (click)="presentModal()">Esqueceu a senha?</ion-label>
+</ion-content>
