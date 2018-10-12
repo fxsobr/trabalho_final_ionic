@@ -20,6 +20,9 @@ export class HomePage {
        }
 
     professores() {
-        this.router.navigate(['/professores']);
+        this.router.navigate(['/lista-professores']);
+    }
+    turmas() {
+        this.router.navigate(['/lista-turmas']);
     }
 }

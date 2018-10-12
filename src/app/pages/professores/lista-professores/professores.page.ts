@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {first} from 'rxjs/operators';
-import {ProfessoresService} from '../../services/professores.service';
+import {ProfessoresService} from '../../../services/professores.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class ProfessoresPage implements OnInit {
   public error: string;
   public name: string;
 
-    constructor(private professorService: ProfessoresService,private router: Router) { }
+    constructor(private professorService: ProfessoresService, private router: Router) { }
 
   ngOnInit() {
         this.showProfessores();

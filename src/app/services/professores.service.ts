@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -19,7 +19,7 @@ export class ProfessoresService {
         return this.http.get(url + id)
             .pipe(
                 map(result => {
-                    console.log('result-professorbyid-professores-service', result);
+                    console.log('result-professorbyid-lista-professores-service', result);
                     return result;
                 })
             );
@@ -38,6 +38,15 @@ export class ProfessoresService {
     alteraProfessor(id: number, name: string, birthDate: string, curriculum: string, status: boolean): Observable<boolean> {
         return this.http.put('http://192.168.2.55:3000/teachers/' + id,
             {name: name, birthDate: birthDate, curriculum: curriculum, status: status})
+            .pipe(
+                map(result => {
+                    return true;
+                })
+            );
+    }
+
+    deletaProfessor(id: number): Observable<boolean> {
+        return this.http.delete('http://192.168.2.55:3000/teachers/' + id)
             .pipe(
                 map(result => {
                     return true;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ProfessoresService} from '../../services/professores.service';
+import {ProfessoresService} from '../../../services/professores.service';
 import {Router} from '@angular/router';
 import {first} from 'rxjs/operators';
 
@@ -22,7 +22,7 @@ export class AlteraProfessorPage implements OnInit {
         this.professorService.alteraProfessor(this.professor._id, this.professor.name, this.professor.birthDate = new Date().toISOString(), this.professor.curriculum, this.professor.status)
             .pipe(first())
             .subscribe(
-                result => this.router.navigate(['/professores']),
+                result => this.router.navigate(['/lista-professores']),
                 err => this.error = 'Erro ao alterar o professor'
             );
     }

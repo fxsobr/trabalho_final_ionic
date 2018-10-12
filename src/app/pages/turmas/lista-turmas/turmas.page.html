@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>turmas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list  *ngFor="let turma of data.items">
+    <ion-item-divider>
+      <ion-item-group>
+        <ion-label color="primary">{{turma.name}}</ion-label>
+      </ion-item-group>
+    </ion-item-divider>
+  </ion-list>
+  <ion-button (click)="criaTurma()">Criar Turma</ion-button>
+</ion-content>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {first} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {ProfessoresService} from '../../services/professores.service';
+import {ProfessoresService} from '../../../services/professores.service';
 
 @Component({
   selector: 'app-criar-professor',
@@ -29,7 +29,7 @@ export class CriarProfessorPage implements OnInit {
         this.professorService.criaProfessor(this.name, this.birthDate = new Date().toISOString(), this.curriculum, this.status)
             .pipe(first())
             .subscribe(
-                result => this.router.navigate(['/professores']),
+                result => this.router.navigate(['/lista-professores']),
                 err => this.error = 'Erro ao Criar Professor'
             );
     }
