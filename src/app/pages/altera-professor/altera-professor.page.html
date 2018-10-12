@@ -1,0 +1,18 @@
+<ion-content>
+  <h4 *ngIf="error">{{error}}</h4>
+  <form #formcontrol="ngForm" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label>Nome</ion-label>
+      <ion-input type="text" name="name" class="form-control" [(ngModel)]="professor.name" value="{{professor.name}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Data de Nascimento</ion-label>
+      <ion-datetime display-format="MM/DD/YYYY" name="birthDate" class="form-control" [(ngModel)]="professor.birthDate" value="{{professor.birthDate}}"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Currículo</ion-label>
+      <ion-textarea class="form-control" name="curriculum" [(ngModel)]="professor.curriculum" value="{{professor.curriculum}}">{{professor.curriculum}}</ion-textarea>
+    </ion-item>
+    <ion-button type="submit" shape="block" color="primary">Alterar Professor</ion-button>
+  </form>
+</ion-content>

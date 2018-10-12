@@ -12,7 +12,7 @@ export class EsqueceuSenhaService {
 
     esqueceuSenha(email: string): Observable<boolean> {
         const params = new HttpParams().set('email', email);
-        return this.http.get('http://localhost:3000/users?', {params})
+        return this.http.get('http://192.168.2.55:3000/users?', {params})
             .pipe(
                 map(result => {
                     return true;

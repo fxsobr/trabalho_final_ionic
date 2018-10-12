@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './auth/auth.guard';
+import {SQLite} from '@ionic-native/sqlite/ngx';
 
 export function tokenGetter() {
     return localStorage.getItem('access_token');
@@ -24,8 +25,7 @@ export function tokenGetter() {
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule,
         JwtModule.forRoot({
             config: {
-                tokenGetter: tokenGetter,
-                whitelistedDomains: ['localhost:3000']
+                tokenGetter: tokenGetter
             }
         })],
     providers: [
@@ -33,6 +33,7 @@ export function tokenGetter() {
         SplashScreen,
         AuthService,
         AuthGuard,
+        SQLite,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
     bootstrap: [AppComponent]

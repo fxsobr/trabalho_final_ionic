@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ModalController, AlertController} from '@ionic/angular';
 import {EsqueceuSenhaService} from '../../services/esqueceu-senha.service';
 import {first} from 'rxjs/operators';
 @Component({
@@ -10,18 +10,34 @@ import {first} from 'rxjs/operators';
 export class EsqueceuSenhaPage implements OnInit {
 
     public email: string;
-    public error: string;
-    public sucesso: string;
 
-    constructor(public modalController: ModalController, private esqueceuSenhaService: EsqueceuSenhaService) {
+    constructor(public modalController: ModalController, private esqueceuSenhaService: EsqueceuSenhaService, public alertController: AlertController) {
+    }
+
+    async presentAlertSucess() {
+        const alert = await this.alertController.create({
+            header: 'Nova senha enviada',
+            message: 'Sua nova senha foi enviada para seu email com sucesso',
+            buttons: ['OK']
+        });
+        await alert.present();
+    }
+
+    async presentAlertFalse() {
+        const alert = await this.alertController.create({
+            header: 'Usuário não encontrado',
+            message: 'Este e-mail não foi encontrado na base de dados',
+            buttons: ['OK']
+        });
+        await alert.present();
     }
 
     public submit() {
         this.esqueceuSenhaService.esqueceuSenha(this.email)
             .pipe(first())
             .subscribe(
-                result => this.sucesso = 'Senha enviada para o seu email',
-                err => this.error = 'erro ao recuperar senha'
+                result => this.presentAlertSucess(),
+                err => this.presentAlertFalse()
             );
     }
 

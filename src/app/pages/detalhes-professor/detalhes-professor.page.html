@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>detalhes-professor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <p>{{professor.name}}</p>
+      <p>{{professor.birthDate}}</p>
+      <p>{{professor.curriculum}}</p>
+      <p>{{professor.status}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-button (click)="editaProfessor()">Editar</ion-button>
+</ion-content>
