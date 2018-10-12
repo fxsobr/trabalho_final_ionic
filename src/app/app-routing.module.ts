@@ -13,8 +13,8 @@ const routes: Routes = [
     { path: 'altera-professor/:id', loadChildren: './pages/professores/altera-professor/altera-professor.module#AlteraProfessorPageModule' },
     { path: 'lista-turmas', loadChildren: './pages/turmas/lista-turmas/turmas.module#TurmasPageModule' },
     { path: 'criar-turma', loadChildren: './pages/turmas/criar-turma/criar-turma.module#CriarTurmaPageModule' },
-    { path: 'altera-turma', loadChildren: './pages/turmas/altera-turma/altera-turma.module#AlteraTurmaPageModule' },
-    { path: 'detalhes-turma', loadChildren: './pages/turmas/detalhes-turma/detalhes-turma.module#DetalhesTurmaPageModule' },
+    { path: 'altera-turma/:id', loadChildren: './pages/turmas/altera-turma/altera-turma.module#AlteraTurmaPageModule' },
+    { path: 'detalhes-turma/:id', loadChildren: './pages/turmas/detalhes-turma/detalhes-turma.module#DetalhesTurmaPageModule' },
 ];
 
 @NgModule({

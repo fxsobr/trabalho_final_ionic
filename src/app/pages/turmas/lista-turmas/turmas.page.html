@@ -5,7 +5,10 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list  *ngFor="let turma of data.items">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list  *ngFor="let turma of data?.items" (click)="showTurmaDetails(turma)">
     <ion-item-divider>
       <ion-item-group>
         <ion-label color="primary">{{turma.name}}</ion-label>

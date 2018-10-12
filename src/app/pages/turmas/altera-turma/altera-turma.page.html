@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>altera-turma</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
+<ion-content>
+  <h4 *ngIf="error">{{error}}</h4>
+  <form (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label>Nome</ion-label>
+      <ion-input type="text" name="name" class="form-control" [(ngModel)]="turma.name" value="{{turma.name}}">{{turma.name}}</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ementa</ion-label>
+      <ion-textarea class="form-control" name="ementa" [(ngModel)]="turma.ementa" value="{{turma.ementa}}">{{turma.ementa}}</ion-textarea>
+    </ion-item>
+      <ion-item>
+          <ion-label>Data de Inicio</ion-label>
+          <ion-datetime display-format="MM/DD/YYYY" name="birthDate" class="form-control" [(ngModel)]="turma.beginDate" value="{{turma.beginDate}}"></ion-datetime>
+      </ion-item>
+    <ion-item>
+      <ion-label>Data de Termino</ion-label>
+      <ion-datetime display-format="MM/DD/YYYY" name="endDate" class="form-control" [(ngModel)]="turma.endDate" value="{{turma.endDate}}">{{turma.endDate}}</ion-datetime>
+    </ion-item>
+      <ion-item>
+          <ion-label>Professor</ion-label>
+          <ion-select placeholder="Selecionar" name="teacher" [(ngModel)]="teacher" (ionChange)="teacherOnChange($event)">
+              <ion-select-option  value="{{professor._id}}" *ngFor="let professor of data.items" selected="{{turma.teacher}}">{{professor.name}}</ion-select-option>
+          </ion-select>
+      </ion-item>
+    <ion-button type="submit" shape="block" color="primary">Criar Turma</ion-button>
+  </form>
 </ion-content>

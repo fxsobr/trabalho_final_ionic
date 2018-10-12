@@ -5,5 +5,16 @@
 </ion-header>
 
 <ion-content padding>
+        <ion-card>
+            <ion-card-content ion-list *ngFor="let turma of dataTurma">
+                <p>{{turma.name}}</p>
+                <p>{{turma.ementa}}</p>
+                <p>{{turma.beginDate}}</p>
+                <p>{{turma.endDate}}</p>
+                <p>{{turma.teacher.name}}</p>
 
+            </ion-card-content>
+        </ion-card>
+  <ion-button (click)="editaTurma()">Editar</ion-button>
+  <ion-button (click)="presentAlertConfirm()">Excluir</ion-button>
 </ion-content>

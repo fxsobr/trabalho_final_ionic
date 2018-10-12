@@ -31,4 +31,17 @@ export class TurmasPage implements OnInit {
         this.router.navigate(['/criar-turma']);
     }
 
+
+    showTurmaDetails(turma): void {
+        this.turmaService.currentTurma = turma;
+        this.turmaService.getTurmaById('http://192.168.2.55:3000/classrooms/', turma._id)
+            .subscribe(data => {
+                console.log('getTurmaByid- detalhes turma page', data);
+                this.data = data;
+                this.router.navigate(['/detalhes-turma', data._id]);
+                console.log('depois de passar pelo route navigate', data);
+            });
+    }
+
+
 }
