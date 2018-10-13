@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {first} from 'rxjs/operators';
 import {ProfessoresService} from '../../../services/professores.service';
 import {Router} from '@angular/router';
+import {DatabaseService} from '../../../services/database.service';
+import {query} from '@angular/core/src/render3/query';
 
 @Component({
   selector: 'app-professores',
@@ -14,10 +15,12 @@ export class ProfessoresPage implements OnInit {
   public error: string;
   public name: string;
 
-    constructor(private professorService: ProfessoresService, private router: Router) { }
+
+    constructor(private professorService: ProfessoresService, private router: Router, private databaseService: DatabaseService) { }
+
 
   ngOnInit() {
-        this.showProfessores();
+        this.showProfessores()
   }
 
     showProfessores(): void {
@@ -25,13 +28,13 @@ export class ProfessoresPage implements OnInit {
             .subscribe(data => {
                 console.log(data)
                 this.data = data;
+                console.log('show Professores', this.data);
             });
     }
 
     criaProfessor() {
         this.router.navigate(['/criar-professor']);
     }
-
     showProfessorDetails(professor) {
         console.log(professor)
         this.professorService.currentProfessor = professor;

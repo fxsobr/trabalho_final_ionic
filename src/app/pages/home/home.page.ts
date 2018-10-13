@@ -13,14 +13,6 @@ export class HomePage {
     imagem: any;
     constructor(private databaseService: DatabaseService, private router: Router, private camera: Camera, private professorService: ProfessoresService) {}
 
-    createDbTest() {
-        this.databaseService.rawQuery('SELECT * FROM tabla').then((success) => {
-               console.log(success);
-             }, fail => {
-               console.log(fail);
-             });
-       }
-
      tirarFoto() {
          const options: CameraOptions = {
              quality: 50,

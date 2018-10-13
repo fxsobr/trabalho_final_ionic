@@ -1,17 +1,24 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>professores</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button (click)="criaProfessor()">
+                <ion-icon slot="icon-only" name="person-add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title style="text-align: center">Lista de Professores</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list  *ngFor="let professor of data.items" (click)="showProfessorDetails(professor)">
+  <ion-list  *ngFor="let professor of data?.items" (click)="showProfessorDetails(professor)">
     <ion-item-divider>
       <ion-item-group>
         <ion-label color="primary">{{professor.name}}</ion-label>
       </ion-item-group>
     </ion-item-divider>
   </ion-list>
-
-  <ion-button (click)="criaProfessor()">Criar Professor</ion-button>
 </ion-content>

@@ -13,17 +13,13 @@ export class CriarProfessorPage implements OnInit {
     public name: string;
     public birthDate: string;
     public curriculum: string;
-    public status = true;
+    public status: boolean;
     public error: string;
 
   constructor(private router: Router, private professorService: ProfessoresService) { }
 
   ngOnInit() {
 
-  }
-
-  change() {
-    console.log(this.status);
   }
     public submit() {
         this.professorService.criaProfessor(this.name, this.birthDate = new Date().toISOString(), this.curriculum, this.status)
@@ -32,6 +28,12 @@ export class CriarProfessorPage implements OnInit {
                 result => this.router.navigate(['/lista-professores']),
                 err => this.error = 'Erro ao Criar Professor'
             );
+    }
+
+    statusOnChange(statusSelected) {
+        console.log('Teacher Selected:', statusSelected);
+        this.status = statusSelected;
+        console.log(this.status);
     }
 
 }
