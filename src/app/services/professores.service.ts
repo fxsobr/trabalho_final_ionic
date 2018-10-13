@@ -35,9 +35,9 @@ export class ProfessoresService {
             );
     }
 
-    alteraProfessor(id: number, name: string, birthDate: string, curriculum: string, status: boolean): Observable<boolean> {
+    alteraProfessor(id: number, name: string, birthDate: string, curriculum: string, status: boolean, imagem: string): Observable<boolean> {
         return this.http.put('http://192.168.2.55:3000/teachers/' + id,
-            {name: name, birthDate: birthDate, curriculum: curriculum, status: status})
+            {name: name, birthDate: birthDate, curriculum: curriculum, status: status, imagem: imagem})
             .pipe(
                 map(result => {
                     return true;

@@ -14,6 +14,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './auth/auth.guard';
 import {SQLite} from '@ionic-native/sqlite/ngx';
+import {Camera} from '@ionic-native/camera/ngx';
+import {ImagePicker} from '@ionic-native/image-picker/ngx';
 
 export function tokenGetter() {
     return localStorage.getItem('access_token');
@@ -34,6 +36,8 @@ export function tokenGetter() {
         AuthService,
         AuthGuard,
         SQLite,
+        Camera,
+        ImagePicker,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
     bootstrap: [AppComponent]

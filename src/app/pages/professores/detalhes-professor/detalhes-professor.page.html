@@ -5,6 +5,9 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-avatar>
+        <img [src]="professor.imagem" (click)="presentActionSheet()">
+    </ion-avatar>
   <ion-card>
     <ion-card-content>
       <p>{{professor.name}}</p>

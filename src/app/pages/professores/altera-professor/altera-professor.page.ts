@@ -19,7 +19,7 @@ export class AlteraProfessorPage implements OnInit {
     }
 
     public submit() {
-        this.professorService.alteraProfessor(this.professor._id, this.professor.name, this.professor.birthDate = new Date().toISOString(), this.professor.curriculum, this.professor.status)
+        this.professorService.alteraProfessor(this.professor._id, this.professor.name, this.professor.birthDate = new Date().toISOString(), this.professor.curriculum, this.professor.status, this.professor.imagem)
             .pipe(first())
             .subscribe(
                 result => this.router.navigate(['/lista-professores']),
