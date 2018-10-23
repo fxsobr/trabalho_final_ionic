@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
         this.authService.login(this.email, this.password)
             .pipe(first())
             .subscribe(
-                result => this.router.navigate(['/home']),
+                result => this.router.navigate(['/lista-professores']),
                 err => this.error = 'Could not authenticate'
             );
     }

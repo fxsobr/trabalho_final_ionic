@@ -30,8 +30,27 @@ export class AppComponent {
             this.splashScreen.hide();
         });
     }
+
+    professores() {
+        this.router.navigate(['/lista-professores']);
+        this.menuController.close();
+    }
+    criarNovoProfessor() {
+        this.router.navigate(['/criar-professor']);
+        this.menuController.close();
+    }
+    turmas() {
+        this.router.navigate(['/lista-turmas']);
+        this.menuController.close();
+    }
+    criarNovaTurma() {
+        this.router.navigate(['/criar-turma']);
+        this.menuController.close();
+    }
+
     logout() {
         this.authService.logout();
         this.router.navigate(['login']);
+        this.menuController.close();
     }
 }

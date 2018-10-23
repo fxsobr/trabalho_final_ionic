@@ -8,6 +8,33 @@
       </ion-header>
       <ion-content>
         <ion-list>
+            <ion-item (click)="criarNovoProfessor()">
+                <ion-label>
+                    <ion-icon name="person-add"></ion-icon> Novo Professor
+                </ion-label>
+            </ion-item>
+            <ion-item (click)="criarNovaTurma()">
+                <ion-label>
+                    <ion-icon name="journal"></ion-icon> Nova Turma
+                </ion-label>
+            </ion-item>
+            <ion-item (click)="turmas()">
+                <ion-label>
+                    <ion-icon name="add"></ion-icon> Lista de Turmas
+                </ion-label>
+            </ion-item>
+            <ion-item (click)="professores()">
+                <ion-label>
+                    <ion-icon name="school"></ion-icon> Lista de Professores
+                </ion-label>
+            </ion-item>
+            <ion-item-divider>
+            </ion-item-divider>
+            <ion-item>
+                <ion-label>
+                    <ion-icon name="power"></ion-icon> Configurações
+                </ion-label>
+            </ion-item>
           <ion-item (click)="logout()">
             <ion-label>
               <ion-icon name="power"></ion-icon> Sair

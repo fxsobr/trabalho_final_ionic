@@ -1,3 +1,11 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="lista-professores"></ion-back-button>
+        </ion-buttons>
+        <ion-title style="text-align: center">Nova Turma</ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content>
   <h4 *ngIf="error">{{error}}</h4>
   <form (ngSubmit)="submit()">

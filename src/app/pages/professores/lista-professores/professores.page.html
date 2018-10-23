@@ -21,4 +21,15 @@
       </ion-item-group>
     </ion-item-divider>
   </ion-list>
+
+    <h1>---------------------</h1>
+    <div *ngIf="!users.length" class="null">Você ainda não tem dados</div>
+
+    <ion-list  *ngFor="let user of users" (click)="showProfessorDetails(user)">
+        <ion-item-divider>
+            <ion-item-group>
+                <ion-label color="primary">{{user.id}} - {{user.name}}</ion-label>
+            </ion-item-group>
+        </ion-item-divider>
+    </ion-list>
 </ion-content>
