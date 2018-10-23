@@ -14,7 +14,8 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list  *ngFor="let professor of data?.items" (click)="showProfessorDetails(professor)">
+    <ion-searchbar [(ngModel)]="terms"></ion-searchbar>
+  <ion-list  *ngFor="let professor of data?.items | search: terms" (click)="showProfessorDetails(professor)">
     <ion-item-divider>
       <ion-item-group>
         <ion-label color="primary">{{professor.name}}</ion-label>

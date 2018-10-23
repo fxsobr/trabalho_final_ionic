@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ProfessoresPage } from './professores.page';
+import {SearchPipe} from '../../../pipes/search.pipe';
 
 const routes: Routes = [
   {
@@ -21,6 +22,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ProfessoresPage]
+  declarations: [ProfessoresPage, SearchPipe]
 })
 export class ProfessoresPageModule {}

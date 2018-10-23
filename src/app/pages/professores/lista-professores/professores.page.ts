@@ -26,7 +26,6 @@ export class ProfessoresPage implements OnInit, OnDestroy {
 
     inicializaFuncoes() {
         this.showProfessores();
-        this.loadDeveloperData();
     }
 
   ngOnInit() {
@@ -48,6 +47,7 @@ export class ProfessoresPage implements OnInit, OnDestroy {
                 for (let i = 0; i < this.data.items.length; i++) {
                     console.log(this.data.items[i].name);
                     this.databaseService.insert(this.data.items[i]._id, this.data.items[i].name, this.data.items[i].birthDate, this.data.items[i].curriculum, this.data.items[i].status, this.data.items[i].imagem);
+                    this.loadDeveloperData();
                 }
                 console.log('show Professores', this.data);
             });
