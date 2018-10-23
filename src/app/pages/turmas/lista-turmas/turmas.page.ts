@@ -1,23 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TurmasService} from '../../../services/turmas.service';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-turmas',
   templateUrl: './turmas.page.html',
   styleUrls: ['./turmas.page.scss'],
 })
-export class TurmasPage implements OnInit {
+export class TurmasPage implements OnInit, OnDestroy  {
 
     public data: any;
     public error: string;
     public name: string;
+    navigationSubscription;
 
-  constructor(private turmaService: TurmasService, private router: Router) { }
-
-  ngOnInit() {
-      this.showTurmas();
+  constructor(private turmaService: TurmasService, private router: Router) {
+      this.navigationSubscription = this.router.events.subscribe((e: any) => {
+          if (e instanceof NavigationEnd) {
+              this.inicializaFuncoes();
+          }
+      });
   }
+
+    inicializaFuncoes() {
+        this.showTurmas();
+    }
+
+    ngOnInit() {
+    }
+
+    ngOnDestroy() {
+        if (this.navigationSubscription) {
+            this.navigationSubscription.unsubscribe();
+        }
+    }
 
     showTurmas(): void {
         this.turmaService.getTurmas('http://192.168.2.55:3000/classrooms')
