@@ -90,10 +90,8 @@ export class DetalhesProfessorPage implements OnInit {
     editaProfessor(): void {
         this.professorService.getProfessoresById('http://192.168.2.55:3000/teachers/', this.professor._id)
             .subscribe(data => {
-                console.log('getProfessorByid- detalhes professor page', data);
                 this.data = data;
                 this.router.navigate(['/altera-professor', data._id]);
-                console.log('depois de passar pelo route navigate', data);
             });
     }
 
@@ -109,7 +107,6 @@ export class DetalhesProfessorPage implements OnInit {
             .getPicture(options)
             .then((imageData) => {
                 this.base64Image = 'data:image/jpeg;base64,' + imageData;
-                console.log('imagem', this.base64Image);
                 this.salvaFoto();
             }, (err) => {
                 console.log(err);

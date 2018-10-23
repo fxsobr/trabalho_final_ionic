@@ -31,7 +31,6 @@ export class CriarProfessorPage implements OnInit {
     }
 
     statusOnChange(statusSelected) {
-        console.log('Teacher Selected:', statusSelected);
         this.status = statusSelected;
         console.log(this.status);
     }

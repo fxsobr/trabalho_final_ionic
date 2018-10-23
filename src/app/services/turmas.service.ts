@@ -18,7 +18,6 @@ export class TurmasService {
         return this.http.get(url + id)
             .pipe(
                 map(result => {
-                    console.log('result-turmabyid-lista-turmas-service', result);
                     return result;
                 })
             );

@@ -14,23 +14,37 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-searchbar [(ngModel)]="terms"></ion-searchbar>
-  <ion-list  *ngFor="let professor of data?.items | search: terms" (click)="showProfessorDetails(professor)">
-    <ion-item-divider>
-      <ion-item-group>
-        <ion-label color="primary">{{professor.name}}</ion-label>
-      </ion-item-group>
-    </ion-item-divider>
-  </ion-list>
+    <div *ngIf="!professors.length" class="null">Você ainda não tem dados</div>
+    <ion-card *ngFor="let professor of professors  | search: terms" (click)="showProfessorDetails(professors)">
+        <ion-item lines="full" color="primary" text-center>
+            <ion-label>
+                <strong>{{ professor.name | titlecase }}</strong>
+                <br/>
+                <small>{{ professor.email }}</small>
+            </ion-label>
+        </ion-item>
+        <ion-card-content text-center>
+            <ion-avatar class='avatar' size="large">
+                <img [src]="professor.imagem"/>
+            </ion-avatar>
+            <br/>
+            <ion-text>
+                Data de Nascimento: {{ professor.birthDate | date }}
+            </ion-text>
+        </ion-card-content>
+        <ion-item lines="full" color="light">
+            <ion-button slot="start" size="small" fill="clear" color="dark" disabled="true">
+                <ion-icon name="male" *ngIf="professor.gender==='male'"></ion-icon>
+                <ion-icon name="female" *ngIf="professor.gender==='female'"></ion-icon>
+            </ion-button>
+        </ion-item>
+    </ion-card>
 
-    <h1>---------------------</h1>
-    <div *ngIf="!users.length" class="null">Você ainda não tem dados</div>
-
-    <ion-list  *ngFor="let user of users" (click)="showProfessorDetails(user)">
-        <ion-item-divider>
-            <ion-item-group>
-                <ion-label color="primary">{{user.id}} - {{user.name}}</ion-label>
-            </ion-item-group>
-        </ion-item-divider>
-    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="loadProfessorDataFromDB($event)">
+        <ion-infinite-scroll-content loadingText="Carregando..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

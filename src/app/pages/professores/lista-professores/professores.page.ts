@@ -13,7 +13,8 @@ export class ProfessoresPage implements OnInit, OnDestroy {
   public data: any;
   public error: string;
   public name: string;
-  users = [];
+  public terms: string;
+  professors = [];
   navigationSubscription;
 
     constructor(private professorService: ProfessoresService, private router: Router, private databaseService: DatabaseService) {
@@ -25,6 +26,7 @@ export class ProfessoresPage implements OnInit, OnDestroy {
     }
 
     inicializaFuncoes() {
+        this.refresh();
         this.showProfessores();
     }
 
@@ -38,6 +40,10 @@ export class ProfessoresPage implements OnInit, OnDestroy {
     }
 
 
+    refresh(event?: any) {
+        this.professors = [];
+        this.loadProfessorDataFromDB(event);
+    }
 
     showProfessores(): void {
         this.professorService.getProfessores('http://192.168.2.55:3000/teachers')
@@ -47,18 +53,25 @@ export class ProfessoresPage implements OnInit, OnDestroy {
                 for (let i = 0; i < this.data.items.length; i++) {
                     console.log(this.data.items[i].name);
                     this.databaseService.insert(this.data.items[i]._id, this.data.items[i].name, this.data.items[i].birthDate, this.data.items[i].curriculum, this.data.items[i].status, this.data.items[i].imagem);
-                    this.loadDeveloperData();
                 }
-                console.log('show Professores', this.data);
             });
     }
 
-    loadDeveloperData() {
-        this.databaseService.getAllUsers().then(data => {
-            this.users = data;
+    loadProfessorDataFromDB(event?: any) {
+        this.databaseService.getAllProfessors().then(data => {
+            for (const professor of data) {
+                this.professors.push(professor);
+            }
+            if (event) {
+                event.target.complete();
+            }
+        }, err => {
+            console.log('Erro ao buscar os professores', err);
+            if (event) {
+                event.target.complete();
+            }
         });
     }
-
 
     criaProfessor() {
         this.router.navigate(['/criar-professor']);

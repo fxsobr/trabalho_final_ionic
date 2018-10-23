@@ -19,7 +19,6 @@ export class ProfessoresService {
         return this.http.get(url + id)
             .pipe(
                 map(result => {
-                    console.log('result-professorbyid-lista-professores-service', result);
                     return result;
                 })
             );
