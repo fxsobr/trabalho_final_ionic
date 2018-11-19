@@ -3,6 +3,7 @@ import {TurmasService} from '../../../services/turmas.service';
 import {Router} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {ProfessoresService} from '../../../services/professores.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-altera-turma',
@@ -33,7 +34,7 @@ export class AlteraTurmaPage implements OnInit {
     }
 
     showProfessores(): void {
-        this.professorService.getProfessores('http://192.168.2.55:3000/teachers')
+        this.professorService.getProfessores(environment.api_url_server + environment.teachers_path)
             .subscribe(data => {
                 console.log(data)
                 this.data = data;

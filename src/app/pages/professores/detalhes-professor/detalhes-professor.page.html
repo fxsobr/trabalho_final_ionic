@@ -1,21 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>detalhes-professor</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="lista-professores"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center">Detalhar Professor</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-avatar>
-        <img [src]="professor.imagem" (click)="presentActionSheet()">
-    </ion-avatar>
   <ion-card>
-    <ion-card-content>
-      <p>{{professor.name}}</p>
-      <p>{{professor.birthDate}}</p>
-      <p>{{professor.curriculum}}</p>
-      <p>{{professor.status}}</p>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="full" color="primary" text-center>
+      <ion-label>
+        <strong>{{ professor.name | titlecase }}</strong>
+      </ion-label>
+    </ion-item>
+    <ion-card-content text-center>
+      <ion-avatar class='avatar' size="large">
+        <img [src]="professor.imagem" (click)="presentActionSheet()"/>
+      </ion-avatar>
+      <ion-label>
+          {{ professor.curriculum}}
+      </ion-label>
+      <br/>
+      <ion-text>
+        Data de Nascimento: {{ professor.birthDate | date }}
+      </ion-text>
     </ion-card-content>
   </ion-card>
-  <ion-button (click)="editaProfessor()">Editar</ion-button>
+  <ion-button (click)="editaProfessor(professor._id)">Editar</ion-button>
     <ion-button (click)="presentAlertConfirm()">Excluir</ion-button>
 </ion-content>

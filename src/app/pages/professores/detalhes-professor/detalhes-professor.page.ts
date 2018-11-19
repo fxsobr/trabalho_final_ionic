@@ -5,6 +5,7 @@ import {first} from 'rxjs/operators';
 import {AlertController, ActionSheetController} from '@ionic/angular';
 import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 import {ImagePicker, ImagePickerOptions} from '@ionic-native/image-picker/ngx';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-detalhes-professor',
@@ -17,6 +18,7 @@ export class DetalhesProfessorPage implements OnInit {
     data: any;
     base64Image: any;
     error: any
+    loader: any;
 
     constructor(private professorService: ProfessoresService, private router: Router, public alertController: AlertController, private camera: Camera, public actionSheetController: ActionSheetController, private imagePicker: ImagePicker) {
     }
@@ -87,11 +89,11 @@ export class DetalhesProfessorPage implements OnInit {
         await alert.present();
     }
 
-    editaProfessor(): void {
-        this.professorService.getProfessoresById('http://192.168.2.55:3000/teachers/', this.professor._id)
+    editaProfessor(id): void {
+        this.professorService.getProfessoresById(environment.api_url_server + environment.teachers_path + '/', id)
             .subscribe(data => {
                 this.data = data;
-                this.router.navigate(['/altera-professor', data._id]);
+                this.router.navigate(['/altera-professor', id]);
             });
     }
 

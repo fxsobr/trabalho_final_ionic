@@ -8,7 +8,7 @@ export class AuthService {
     constructor(private http: HttpClient) { }
 
     login(email: string, password: string): Observable<boolean> {
-        return this.http.post<{acessToken: string}>('http://192.168.2.55:3000/users/authenticate', {email: email, password: password})
+        return this.http.post<{acessToken: string}>('http://mentortreino.unidavi.edu.br:4000/users/authenticate', {email: email, password: password})
             .pipe(
             map(result => {
                 localStorage.setItem('access_token', result.acessToken);

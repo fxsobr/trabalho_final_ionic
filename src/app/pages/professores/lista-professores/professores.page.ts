@@ -1,83 +1,68 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProfessoresService} from '../../../services/professores.service';
-import {NavigationEnd, Router} from '@angular/router';
-import {DatabaseService} from '../../../services/database.service';
+import {Router} from '@angular/router';
+import {LoadingController} from '../../../../../node_modules/@ionic/angular';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-professores',
   templateUrl: './professores.page.html',
   styleUrls: ['./professores.page.scss'],
 })
-export class ProfessoresPage implements OnInit, OnDestroy {
+export class ProfessoresPage implements OnInit {
 
-  public data: any;
-  public error: string;
-  public name: string;
-  public terms: string;
-  professors = [];
-  navigationSubscription;
+    public data: any;
+    public error: string;
+    public name: string;
+    loader: any;
+    page = 1;
 
-    constructor(private professorService: ProfessoresService, private router: Router, private databaseService: DatabaseService) {
-        this.navigationSubscription = this.router.events.subscribe((e: any) => {
-            if (e instanceof NavigationEnd) {
-                this.inicializaFuncoes();
-            }
+    constructor(private professorService: ProfessoresService, private router: Router,  private loadingCtrl: LoadingController) { }
+
+    ngOnInit() {
+
+    }
+    private async presentLoading() {
+        const loader = await this.loadingCtrl.create({
+            message: 'Carregando',
+            translucent: true
         });
+
+        loader.present();
+        return loader;
     }
 
-    inicializaFuncoes() {
-        this.refresh();
+    async ionViewWillEnter() {
+        this.loader = await this.presentLoading();
         this.showProfessores();
+        this.loader.dismiss();
     }
 
-  ngOnInit() {
-  }
-
-    ngOnDestroy() {
-        if (this.navigationSubscription) {
-            this.navigationSubscription.unsubscribe();
-        }
-    }
-
-
-    refresh(event?: any) {
-        this.professors = [];
-        this.loadProfessorDataFromDB(event);
+    loadMore(event) {
+        this.page++;
+        this.professorService.getProfessores(environment.api_url_server + environment.teachers_path + `?_page=${this.page}`)
+            .subscribe(data => {
+                for (const professor of Object.values(data)[1]) {
+                    this.data.items.push(professor);
+                }
+            });
+        event.target.complete();
     }
 
     showProfessores(): void {
-        this.professorService.getProfessores('http://192.168.2.55:3000/teachers')
+        this.professorService.getProfessores(environment.api_url_server + environment.teachers_path)
             .subscribe(data => {
-                console.log(data)
+                console.log(data);
                 this.data = data;
-                for (let i = 0; i < this.data.items.length; i++) {
-                    console.log(this.data.items[i].name);
-                    this.databaseService.insert(this.data.items[i]._id, this.data.items[i].name, this.data.items[i].birthDate, this.data.items[i].curriculum, this.data.items[i].status, this.data.items[i].imagem);
-                }
             });
-    }
-
-    loadProfessorDataFromDB(event?: any) {
-        this.databaseService.getAllProfessors().then(data => {
-            for (const professor of data) {
-                this.professors.push(professor);
-            }
-            if (event) {
-                event.target.complete();
-            }
-        }, err => {
-            console.log('Erro ao buscar os professores', err);
-            if (event) {
-                event.target.complete();
-            }
-        });
     }
 
     criaProfessor() {
         this.router.navigate(['/criar-professor']);
     }
+
     showProfessorDetails(professor) {
-        console.log(professor)
+        console.log(professor);
         this.professorService.currentProfessor = professor;
         this.router.navigate(['/detalhes-professor']);
     }

@@ -3,6 +3,7 @@ import {TurmasService} from '../../../services/turmas.service';
 import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 import {first} from 'rxjs/operators';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-detalhes-turma',
@@ -58,7 +59,7 @@ export class DetalhesTurmaPage implements OnInit {
     }
 
     showTurmaById(): void {
-        this.turmaService.getTurmaById('http://192.168.2.55:3000/classrooms/', this.turma._id)
+        this.turmaService.getTurmaById(environment.api_url_server + environment.classrooms_path, this.turma._id)
             .subscribe(data => {
                 this.dataTurma = new Set();
                 this.dataTurma.add(data);
@@ -67,7 +68,7 @@ export class DetalhesTurmaPage implements OnInit {
     }
 
     editaTurma(): void {
-        this.turmaService.getTurmaById('http://192.168.2.55:3000/classrooms/', this.turma._id)
+        this.turmaService.getTurmaById(environment.api_url_server + environment.classrooms_path, this.turma._id)
             .subscribe(data => {
                 console.log('getTurmaByid- detalhes turma page', data);
                 this.data = data;

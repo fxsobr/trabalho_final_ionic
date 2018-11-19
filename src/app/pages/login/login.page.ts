@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
             .pipe(first())
             .subscribe(
                 result => this.router.navigate(['/lista-professores']),
-                err => this.error = 'Could not authenticate'
+                err => this.error = 'Não foi possível logar'
             );
     }
 

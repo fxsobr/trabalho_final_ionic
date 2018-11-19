@@ -1,19 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>detalhes-turma</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="lista-turmas"></ion-back-button>
+        </ion-buttons>
+        <ion-title style="text-align: center">Detalhar Turmas</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-        <ion-card>
-            <ion-card-content ion-list *ngFor="let turma of dataTurma">
-                <p>{{turma.name}}</p>
-                <p>{{turma.ementa}}</p>
-                <p>{{turma.beginDate}}</p>
-                <p>{{turma.endDate}}</p>
-                <p>{{turma.teacher.name}}</p>
-
-            </ion-card-content>
+        <ion-card *ngFor="let turma of dataTurma">
+                <ion-item lines="full" color="primary" text-center>
+                    <ion-label>
+                        <strong>{{ turma.name | titlecase }}</strong>
+                        <br/>
+                        <p>{{turma.teacher.name}} </p>
+                    </ion-label>
+                </ion-item>
+                <ion-card-content text-center>
+                    <p>{{turma.ementa}}</p>
+                    <p>Data de Início: {{ turma.beginDate | date }}</p>
+                    <p>Data de Término: {{turma.endDate | date }}</p>
+                </ion-card-content>
         </ion-card>
   <ion-button (click)="editaTurma()">Editar</ion-button>
   <ion-button (click)="presentAlertConfirm()">Excluir</ion-button>

@@ -14,15 +14,16 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <ion-list  *ngFor="let turma of data?.items" (click)="showTurmaDetails(turma)">
-    <ion-item-divider>
-      <ion-item-group>
-        <ion-label color="primary">{{turma.name}}</ion-label>
-      </ion-item-group>
-    </ion-item-divider>
-  </ion-list>
-  <ion-button (click)="criaTurma()">Criar Turma</ion-button>
+  <ion-card *ngFor="let turma of data?.items" (click)="showTurmaDetails(turma)">
+    <ion-item lines="full" color="primary" text-center>
+      <ion-label>
+        <strong>{{ turma.name | titlecase }}</strong>
+      </ion-label>
+    </ion-item>
+    <ion-card-content text-center>
+      <ion-text>
+        {{turma.ementa}}
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
